@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Contact</title>
+      <!-- Tailwind CSS -->
+      <link rel="stylesheet" th:href="@{/tailwind/output.css}" />
+      <!-- Additional CSS -->
+      <link rel="stylesheet" th:href="@{/css/styles.css}" />
+
+      <title>
+            Contact
+      </title>
+</head>
+
+<body>
+      <main id="content" data-location="about">
+
+            <div th:replace="~{/fragments/navbar}"></div>
+
+            <article class="bg-blue-200 text-black-800 min-h-dvh pb-8">
+                  <header class="text-center py-10">
+                        <h1 class="text-4xl font-bold text-maya-blue-dark">Contact Us</h1>
+                        <p class="text-lg text-cool-gray-default mt-2">We’re here to help you!</p>
+                  </header>
+                  <section class="flex justify-center mt-10">
+                        <form class="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
+                              <div class="mb-5">
+                                    <label class="block text-maya-blue-dark text-lg font-bold mb-2">Name</label>
+                                    <input type="text"
+                                          class="w-full px-3 py-2 border rounded text-cool-gray-dark focus:border-maya-blue-default focus:ring-1 focus:ring-maya-blue-dark"
+                                          placeholder="Your Name">
+                              </div>
+                              <div class="mb-5">
+                                    <label class="block text-maya-blue-dark text-lg font-bold mb-2">Email</label>
+                                    <input type="email"
+                                          class="w-full px-3 py-2 border rounded text-cool-gray-dark focus:border-maya-blue-default focus:ring-1 focus:ring-maya-blue-dark"
+                                          placeholder="Your Email">
+                              </div>
+                              <div class="mb-5">
+                                    <label class="block text-maya-blue-dark text-lg font-bold mb-2">Message</label>
+                                    <textarea
+                                          class="w-full px-3 py-2 border rounded text-cool-gray-dark focus:border-maya-blue-default focus:ring-1 focus:ring-maya-blue-dark"
+                                          placeholder="Your Message"></textarea>
+                              </div>
+                              <button type="submit"
+                                    class="w-full bg-blue-700 text-white font-bold py-2 rounded-lg hover:bg-blue-800">Send
+                                    Message</button>
+                        </form>
+                  </section>
+            </article>
+            <div th:replace="~{/fragments/footer}"></div>
+
+      </main>
+
+</body>
+
+</html>

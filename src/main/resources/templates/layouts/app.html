@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://thymeleaf.org">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <!-- Tailwind CSS -->
+      <link rel="stylesheet" th:href="@{/tailwind/output.css}" />
+      <!-- Additional CSS -->
+      <link rel="stylesheet" th:href="@{/css/styles.css}" />
+      <!-- Font Awesome -->
+      <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.5.2/css/all.min.css}">
+      <!-- HTMX -->
+      <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+
+      <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">
+            Demo App
+      </title>
+</head>
+
+<body class="font-rubik bg-gray-50 text-gray-800">
+      <!-- Container for the layout -->
+      <div class="min-h-screen flex flex-col">
+
+            <div th:replace="~{fragments/navbar}"></div>
+
+            <!-- Main Layout with Sidebar and Content -->
+            <div class="flex flex-1">
+
+                  <!-- Sidebar -->
+                  <aside class="w-64 bg-gray-100 p-4 hidden md:block border-r">
+                        <nav class="space-y-2" aria-label="Side navigation menu">
+                              <a href="#"
+                                    class="block py-2 px-4 rounded hover:bg-blue-950t hover:text-blue-800 hover:bg-slate-200">
+                                    Dashboard
+                              </a>
+                              <a th:href="@{/products}"
+                                    class="block py-2 px-4 rounded hover:bg-blue-950t hover:text-blue-800 hover:bg-slate-200">
+                                    Products
+                              </a>
+                              <a th:href="@{/categories}"
+                                    class="block py-2 px-4 rounded hover:bg-blue-950t hover:text-blue-800 hover:bg-slate-200">
+                                    Categories
+                              </a>
+                              <a href="#"
+                                    class="block py-2 px-4 rounded hover:bg-blue-950t hover:text-blue-800 hover:bg-slate-200">
+                                    Settings
+                              </a>
+                        </nav>
+                  </aside>
+
+                  <!--?  Main Content -->
+                  <main layout:fragment="content" class="flex-1 p-6">
+
+                        <!-- ? Placeholder for dynamic Thymeleaf content -->
+
+                  </main>
+
+                  <!--? ERROR MESSAGE BOX -->
+                  <div th:replace="~{fragments/error-message :: errorMessageBox(error=${error})}"></div>
+
+                  <!-- ? SUCCESS MESSAGE BOX -->
+                  <div th:replace="~{/fragments/success-message :: successMessageBox(message=${success})}"></div>
+
+                  <!-- ? Empty div for modals -->
+                  <div class="modalDiv">
+                        <!--  ? modal content here -->
+                  </div>
+            </div>
+
+            <!-- Footer -->
+            <div th:replace="~{fragments/footer}"></div>
+      </div>
+</body>
+
+</html>

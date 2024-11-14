@@ -1,0 +1,30 @@
+{
+	"configurations": [
+		{
+			"type": "java",
+			"name": "Application",
+			"request": "launch",
+			"mainClass": "com.ansbeno.start_beca.Application",
+			"projectName": "start-beca"
+		},
+		{
+			"type": "java",
+			"name": "CodeLens (Launch) - App",
+			"request": "launch",
+			"mainClass": "com.test.maven.App",
+			"console": "internalConsole",
+			"projectName": "my.app"
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-StartBecaApplication<start-beca>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"mainClass": "com.ansbeno.start_beca.StartBecaApplication",
+			"projectName": "start-beca",
+			"args": "",
+			"envFile": "${workspaceFolder}/.env",
+			"vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=58677 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=start-beca"
+		}
+	]
+}

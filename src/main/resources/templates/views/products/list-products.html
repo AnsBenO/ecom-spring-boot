@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Products</title>
+</head>
+
+<body>
+      <main layout:fragment="content" id="content" class="p-6 w-full" data-location="products">
+            <!-- Search Form -->
+            <form method="get" action="/products" class="flex items-center mb-4">
+                  <input type="text" name="keyword" placeholder="Search products..."
+                        class="p-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-celeste-dark"
+                        th:value="${keyword}" />
+                  <input type="hidden" name="page" th:value="1" />
+                  <button type="submit" class="px-4 py-2 bg-blue-900 hover:bg-blue-600 text-white rounded-r-lg">
+                        Search
+                  </button>
+            </form>
+
+            <!-- Products Table -->
+            <div class="overflow-x-auto w-full">
+                  <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+                        <thead
+                              class="bg-zinc-100 text-blue-900 font-bold border border-b-2 border-x-0 border-y-0 border-slate-200">
+                              <tr>
+                                    <th class="py-3 px-4 text-left font-semibold">Id</th>
+                                    <th class="py-3 px-4 text-left font-semibold">Name</th>
+                                    <th class="py-3 px-4 text-left font-semibold">Description</th>
+                                    <th class="py-3 px-4 text-left font-semibold">Price</th>
+                                    <th class="py-3 px-4 text-left font-semibold">Category</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <tr th:each="product : ${products.data}" class="border-b hover:bg-gray-100">
+                                    <td class="py-3 px-4" th:text="${product.id}"></td>
+                                    <td class="py-3 px-4" th:text="${product.name}"></td>
+                                    <td class="py-3 px-4 truncate" th:text="${product.description}"></td>
+                                    <td class="py-3 px-4" th:text="${product.price}"></td>
+                                    <td class="py-3 px-4" th:text="${product.categoryName}"></td>
+                              </tr>
+                        </tbody>
+                  </table>
+            </div>
+
+            <!-- Pagination Controls -->
+            <div class="flex justify-between items-center mt-4">
+                  <!-- Page Info -->
+                  <div>
+                        Page <span th:text="${products.pageNumber}"></span> of <span
+                              th:text="${products.totalPages}"></span>
+                        (Total items: <span th:text="${products.totalElements}"></span>)
+                  </div>
+                  <!-- Navigation Buttons -->
+                  <div class="flex items-center space-x-2">
+                        <a th:if="${products.hasPrevious}"
+                              th:href="@{/products(page=${products.pageNumber - 1}, keyword=${keyword})}"
+                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Previous</a>
+                        <a th:if="${products.hasNext}"
+                              th:href="@{/products(page=${products.pageNumber + 1}, keyword=${keyword})}"
+                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Next</a>
+                  </div>
+            </div>
+      </main>
+</body>
+
+</html>
