@@ -10,28 +10,44 @@
 
 <body>
       <main layout:fragment="content" id="content" class="p-6 w-full" data-location="products">
-            <!-- Search Form -->
-            <form method="get" action="/products" class="flex items-center mb-4">
-                  <input type="text" name="keyword" placeholder="Search products..."
-                        class="p-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-celeste-dark"
-                        th:value="${keyword}" />
-                  <input type="hidden" name="page" th:value="1" />
-                  <button type="submit" class="px-4 py-2 bg-blue-900 hover:bg-blue-600 text-white rounded-r-lg">
-                        Search
-                  </button>
-            </form>
+
+            <header class="flex flex-row justify-between">
+                  <!-- Search Form -->
+                  <form method="get" action="/products" class="flex items-center space-x-2 mb-4">
+                        <div class="relative flex items-center">
+                              <i
+                                    class="fa-solid fa-magnifying-glass absolute left-2 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                              <input type="text" name="keyword" placeholder="Search products..."
+                                    class="pl-8 pr-2 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-celeste-dark h-10 w-64"
+                                    th:value="${keyword}" />
+                        </div>
+                        <input type="hidden" name="page" th:value="1" />
+                        <select name="category"
+                              class="p-2 border-t border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-900 h-10">
+                              <option value="" selected>All Categories</option>
+                              <option th:each="option : ${categories}"
+                                    th:selected="${#strings.equals(param.category,option)}" th:value="${option}"
+                                    th:text="${option}">
+                              </option>
+                        </select>
+                        <button type="submit"
+                              class="px-4 py-2 bg-blue-900 hover:bg-blue-600 text-white rounded-r-lg h-10">
+                              Search
+                        </button>
+                  </form>
+            </header>
 
             <!-- Products Table -->
             <div class="overflow-x-auto w-full">
                   <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
-                        <thead
-                              class="bg-zinc-100 text-blue-900 font-bold border border-b-2 border-x-0 border-y-0 border-slate-200">
+                        <thead class="bg-zinc-100 text-blue-900 font-bold">
                               <tr>
-                                    <th class="py-3 px-4 text-left font-semibold">Id</th>
-                                    <th class="py-3 px-4 text-left font-semibold">Name</th>
-                                    <th class="py-3 px-4 text-left font-semibold">Description</th>
-                                    <th class="py-3 px-4 text-left font-semibold">Price</th>
-                                    <th class="py-3 px-4 text-left font-semibold">Category</th>
+                                    <th class="py-3 px-4 text-left font-bold">Id</th>
+                                    <th class="py-3 px-4 text-left font-bold">Name</th>
+                                    <th class="py-3 px-4 text-left font-bold">Description</th>
+                                    <th class="py-3 px-4 text-left font-bold">Price</th>
+                                    <th class="py-3 px-4 text-left font-bold">Image</th>
+                                    <th class="py-3 px-4 text-left font-bold">Category</th>
                               </tr>
                         </thead>
                         <tbody>
@@ -40,30 +56,38 @@
                                     <td class="py-3 px-4" th:text="${product.name}"></td>
                                     <td class="py-3 px-4 truncate" th:text="${product.description}"></td>
                                     <td class="py-3 px-4" th:text="${product.price}"></td>
+                                    <td class="py-3 px-4">
+                                          <button class="view-image-btn p-2 hover:opacity-70 transition-opacity"
+                                                th:data-image-src="${product.image}"
+                                                th:data-image-alt="${product.name}">
+                                                <i class="fa-regular fa-image text-blue-400"></i>
+                                          </button>
+                                    </td>
                                     <td class="py-3 px-4" th:text="${product.categoryName}"></td>
                               </tr>
                         </tbody>
                   </table>
             </div>
 
+
             <!-- Pagination Controls -->
             <div class="flex justify-between items-center mt-4">
-                  <!-- Page Info -->
                   <div>
                         Page <span th:text="${products.pageNumber}"></span> of <span
                               th:text="${products.totalPages}"></span>
                         (Total items: <span th:text="${products.totalElements}"></span>)
                   </div>
-                  <!-- Navigation Buttons -->
                   <div class="flex items-center space-x-2">
                         <a th:if="${products.hasPrevious}"
-                              th:href="@{/products(page=${products.pageNumber - 1}, keyword=${keyword})}"
+                              th:href="@{/products(page=${products.pageNumber - 1}, keyword=${keyword}, category=${param.category})}"
                               class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Previous</a>
                         <a th:if="${products.hasNext}"
-                              th:href="@{/products(page=${products.pageNumber + 1}, keyword=${keyword})}"
+                              th:href="@{/products(page=${products.pageNumber + 1}, keyword=${keyword}, category=${param.category})}"
                               class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Next</a>
                   </div>
             </div>
+
+            <div th:replace="~{fragments/product-image-modal}"></div>
       </main>
 </body>
 

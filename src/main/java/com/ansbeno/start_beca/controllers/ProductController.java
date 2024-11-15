@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ansbeno.start_beca.dtos.PagedResultDto;
 import com.ansbeno.start_beca.dtos.ProductDto;
-import com.ansbeno.start_beca.entities.Product;
-import com.ansbeno.start_beca.services.ProductService;
+import com.ansbeno.start_beca.services.category.CategoryService;
+import com.ansbeno.start_beca.services.product.ProductService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,21 +28,22 @@ import lombok.extern.slf4j.Slf4j;
 class ProductController {
 
       private final ProductService productService;
+      private final CategoryService categoryService;
 
       @GetMapping
       public String getAllProducts(@RequestParam(defaultValue = "1") int page,
                   @RequestParam(required = false, defaultValue = "") String keyword,
+                  @RequestParam(required = false, defaultValue = "") String category,
                   Model model) {
             if (page < 1) {
                   page = 1;
             }
 
-            PagedResultDto<ProductDto> products = productService.findAll(page, keyword);
+            PagedResultDto<ProductDto> products = productService.findAll(page, keyword, category);
 
-            if (page > products.totalPages()) {
-                  return "redirect:/products?page=" + products.totalPages() + "&keyword=" + keyword;
-            }
+            List<String> categories = categoryService.findNames();
 
+            model.addAttribute("categories", categories);
             model.addAttribute("products", products);
             model.addAttribute("keyword", keyword);
             return "views/products/list-products";

@@ -11,31 +11,53 @@
 <body>
       <main layout:fragment="content" class="p-6 w-full" id="content" data-location="categories">
             <!-- Search Form -->
-            <form method="get" action="/categories" class="flex items-center mb-4">
-                  <input type="text" name="keyword" placeholder="Search categories..."
-                        class="p-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-celeste-dark"
-                        th:value="${keyword}" />
-                  <input type="hidden" name="page" th:value="1" />
-                  <button type="submit" class="px-4 py-2 bg-blue-900 hover:bg-blue-600 text-white rounded-r-lg">
-                        Search
-                  </button>
-            </form>
+            <header class="flex flex-row justify-between">
+                  <form method="get" action="/categories" class="flex items-center space-x-2 mb-4">
+                        <div class="relative flex items-center">
+                              <i
+                                    class="fa-solid fa-magnifying-glass absolute left-2 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                              <input type="text" name="keyword" placeholder="Search products..."
+                                    class="pl-8 pr-2 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-celeste-dark h-10 w-64"
+                                    th:value="${keyword}" />
+                        </div>
+                        <button type="submit" class="px-4 py-2 bg-blue-900 hover:bg-blue-600 text-white rounded-r-lg">
+                              Search
+                        </button>
+                  </form>
+
+                  <!-- Navigation Buttons -->
+                  <div class="flex items-center space-x-2">
+                        <a th:if="${categories.hasPrevious}"
+                              th:href="@{/categories(page=${categories.pageNumber - 1}, keyword=${keyword})}"
+                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Previous</a>
+                        <a th:if="${categories.hasNext}"
+                              th:href="@{/categories(page=${categories.pageNumber + 1}, keyword=${keyword})}"
+                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Next</a>
+                  </div>
+
+            </header>
 
             <!-- categories Table -->
             <div class="overflow-x-auto w-full">
                   <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                         <thead
-                              class="bg-zinc-100 text-blue-900 font-bold border border-b-2 border-x-0 border-y-0 border-slate-200">
+                              class="bg-zinc-100 text-blue-900 font-bold border border-b border-x-0 border-y-0 border-slate-200">
                               <tr>
-                                    <th class="py-3 px-4 text-left font-semibold">Id</th>
-                                    <th class="py-3 px-4 text-left font-semibold">Name</th>
+                                    <th class="py-3 px-4 text-left font-bold">Id</th>
+                                    <th class="py-3 px-4 text-left font-bold">Name</th>
 
                               </tr>
                         </thead>
                         <tbody>
                               <tr th:each="category : ${categories.data}" class="border-b hover:bg-gray-100">
-                                    <td class="py-3 px-4" th:text="${category.id}"></td>
-                                    <td class="py-3 px-4" th:text="${category.name}"></td>
+                                    <td class="py-3 px-4" th:text="${category.id}">
+
+                                    </td>
+                                    <td class="py-3 px-4">
+                                          <span th:text="${category.name}"></span>
+                                          <a class="text-blue-400" th:href="@{/products(category=${category.name})}"><i
+                                                      class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                    </td>
 
                               </tr>
                         </tbody>

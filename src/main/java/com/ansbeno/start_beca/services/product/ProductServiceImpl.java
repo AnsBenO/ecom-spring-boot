@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.services;
+package com.ansbeno.start_beca.services.product;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,18 +18,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class ProductService implements IService<ProductDto, Long> {
+public class ProductServiceImpl implements ProductService {
 
       private final ProductRepository productRepository;
 
       private final ProductMapper productMapper;
 
       @Override
-      public PagedResultDto<ProductDto> findAll(int pageNumber, String keyword) {
+      public PagedResultDto<ProductDto> findAll(int pageNumber, String keyword, String category) {
             Sort sort = Sort.by("id").ascending();
             pageNumber = pageNumber <= 1 ? 0 : pageNumber - 1;
             Pageable pageable = PageRequest.of(pageNumber, 10, sort);
-            Page<Product> productPage = productRepository.findByNameContainingIgnoreCase(keyword, pageable);
+
+            Page<Product> productPage = category.length() == 0
+                        ? productRepository.findByNameContainingIgnoreCase(keyword, pageable)
+                        : productRepository.findByNameAndCategory(keyword, category, pageable);
             return PagedResultDto.<ProductDto>builder()
                         .data(productPage.toList()
                                     .stream()

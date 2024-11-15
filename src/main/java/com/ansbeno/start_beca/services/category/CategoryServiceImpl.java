@@ -1,4 +1,6 @@
-package com.ansbeno.start_beca.services;
+package com.ansbeno.start_beca.services.category;
+
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class CategoryService implements IService<CategoryDto, Long> {
+public class CategoryServiceImpl implements CategoryService {
 
       private final CategoryRepository categoryRepository;
 
@@ -60,6 +62,11 @@ public class CategoryService implements IService<CategoryDto, Long> {
             Category categoryToDelete = categoryRepository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
             categoryRepository.delete(categoryToDelete);
+      }
+
+      @Override
+      public List<String> findNames() {
+            return categoryRepository.findAllNames();
       }
 
 }

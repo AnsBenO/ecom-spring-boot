@@ -1,7 +1,5 @@
 package com.ansbeno.start_beca.controllers;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ansbeno.start_beca.dtos.CategoryDto;
 import com.ansbeno.start_beca.dtos.PagedResultDto;
-import com.ansbeno.start_beca.dtos.ProductDto;
-import com.ansbeno.start_beca.services.CategoryService;
+import com.ansbeno.start_beca.services.category.CategoryServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/categories")
 class CategoryController {
 
-      private final CategoryService categoryService;
+      private final CategoryServiceImpl categoryService;
 
       @GetMapping
       public String getAllCategories(
@@ -32,10 +29,6 @@ class CategoryController {
             }
 
             PagedResultDto<CategoryDto> categories = categoryService.findAll(page, keyword);
-
-            if (page > categories.totalPages()) {
-                  return "redirect:/products?page=" + categories.totalPages() + "&keyword=" + keyword;
-            }
 
             model.addAttribute("keyword", keyword);
             model.addAttribute("categories", categories);

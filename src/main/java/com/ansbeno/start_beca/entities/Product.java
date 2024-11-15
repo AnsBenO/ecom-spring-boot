@@ -31,6 +31,8 @@ public class Product {
 
       private Double price;
 
+      private String image;
+
       @ManyToOne(fetch = FetchType.EAGER)
       @JoinColumn(name = "category_id")
       private Category category;
