@@ -10,7 +10,7 @@
 
 @media (max-width: 767px) {
 	#navbar-default.expanded {
-		animation: animate-nav 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		animation: animate-nav 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	}
 	#navbar-default.expanded > ul {
 		animation: animate-nav-content 1s
@@ -60,11 +60,11 @@
 }
 
 .fade-in {
-	animation: fadeIn 0.5s forwards;
+	animation: fadeIn 0.3s forwards;
 }
 
 .fade-out {
-	animation: fadeOut 0.5s forwards;
+	animation: fadeOut 0.3s forwards;
 }
 
 .hidden-message {

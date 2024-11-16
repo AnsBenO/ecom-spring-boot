@@ -10,8 +10,11 @@ import com.ansbeno.start_beca.dtos.CategoryDto;
 import com.ansbeno.start_beca.dtos.PagedResultDto;
 import com.ansbeno.start_beca.services.category.CategoryServiceImpl;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/categories")
@@ -23,6 +26,7 @@ class CategoryController {
       public String getAllCategories(
                   @RequestParam(required = false, defaultValue = "") String keyword,
                   @RequestParam(defaultValue = "1") int page,
+                  HttpServletRequest request,
                   Model model) {
             if (page < 1) {
                   page = 1;
@@ -32,6 +36,14 @@ class CategoryController {
 
             model.addAttribute("keyword", keyword);
             model.addAttribute("categories", categories);
+
+            // Check if the request is an HTMX request
+            boolean isHtmxRequest = request.getHeader("HX-Request") != null;
+
+            if (isHtmxRequest) {
+                  return "views/categories/list-categories :: categories-table";
+            }
+
             return "views/categories/list-categories";
       }
 

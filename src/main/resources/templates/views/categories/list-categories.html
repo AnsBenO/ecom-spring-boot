@@ -10,35 +10,50 @@
 
 <body>
       <main layout:fragment="content" class="p-6 w-full" id="content" data-location="categories">
-            <!-- Search Form -->
-            <header class="flex flex-row justify-between">
-                  <form method="get" action="/categories" class="flex items-center space-x-2 mb-4">
-                        <div class="relative flex items-center">
-                              <i
-                                    class="fa-solid fa-magnifying-glass absolute left-2 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                              <input type="text" name="keyword" placeholder="Search products..."
-                                    class="pl-8 pr-2 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-celeste-dark h-10 w-64"
-                                    th:value="${keyword}" />
-                        </div>
-                        <button type="submit" class="px-4 py-2 bg-blue-900 hover:bg-blue-600 text-white rounded-r-lg">
-                              Search
-                        </button>
-                  </form>
-
-                  <!-- Navigation Buttons -->
-                  <div class="flex items-center space-x-2">
-                        <a th:if="${categories.hasPrevious}"
-                              th:href="@{/categories(page=${categories.pageNumber - 1}, keyword=${keyword})}"
-                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Previous</a>
-                        <a th:if="${categories.hasNext}"
-                              th:href="@{/categories(page=${categories.pageNumber + 1}, keyword=${keyword})}"
-                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Next</a>
-                  </div>
-
-            </header>
 
             <!-- categories Table -->
-            <div class="overflow-x-auto w-full">
+            <div id="categoriesTable" th:fragment="categories-table" class="overflow-x-auto w-full">
+                  <!-- Search Form -->
+                  <header class="flex flex-row justify-between">
+                        <form hx-get="/categories" hx-replace="outerHtml" hx-target="#categoriesTable"
+                              class="flex items-center space-x-2 mb-4">
+                              <div class="relative flex items-center">
+                                    <i
+                                          class="fa-solid fa-magnifying-glass absolute left-2 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                                    <input type="text" name="keyword" placeholder="Search products..."
+                                          class="pl-8 pr-2 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-celeste-dark h-10 w-64"
+                                          th:value="${keyword}" />
+                              </div>
+                              <button type="submit"
+                                    class="px-4 py-2 bg-blue-900 hover:bg-blue-600 text-white rounded-r-lg">
+                                    Search
+                              </button>
+                        </form>
+
+                        <!-- Navigation Buttons -->
+                        <div class="flex items-center space-x-2">
+                              <!-- Pagination Controls -->
+                              <a th:if="${categories.hasPrevious}"
+                                    th:hx-get="'/categories?page=' + ${categories.pageNumber - 1} + '&keyword=' + ${keyword}"
+                                    hx-target="#categoriesTable"
+                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">Previous</a>
+
+                              <a th:if="${categories.hasNext}"
+                                    th:hx-get="'/categories?page=' + ${categories.pageNumber + 1} + '&keyword=' + ${keyword}"
+                                    hx-target="#categoriesTable"
+                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">Next</a>
+                              <!-- Add Category Button -->
+                              <div class="flex items-center space-x-2">
+
+                                    <a th:href="@{/categories/add}"
+                                          class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 text-green-500">
+                                          <i class="fa-solid fa-plus"></i> Add Category
+                                    </a>
+                              </div>
+                        </div>
+
+
+                  </header>
                   <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                         <thead
                               class="bg-zinc-100 text-blue-900 font-bold border border-b border-x-0 border-y-0 border-slate-200">
@@ -74,12 +89,16 @@
                   </div>
                   <!-- Navigation Buttons -->
                   <div class="flex items-center space-x-2">
+                        <!-- Pagination Controls -->
                         <a th:if="${categories.hasPrevious}"
-                              th:href="@{/categories(page=${categories.pageNumber - 1}, keyword=${keyword})}"
-                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Previous</a>
+                              th:hx-get="'/categories?page=' + ${categories.pageNumber - 1} + '&keyword=' + ${keyword}"
+                              hx-target="#categoriesTable"
+                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">Previous</a>
+
                         <a th:if="${categories.hasNext}"
-                              th:href="@{/categories(page=${categories.pageNumber + 1}, keyword=${keyword})}"
-                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Next</a>
+                              th:hx-get="'/categories?page=' + ${categories.pageNumber + 1} + '&keyword=' + ${keyword}"
+                              hx-target="#categoriesTable"
+                              class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">Next</a>
                   </div>
             </div>
       </main>

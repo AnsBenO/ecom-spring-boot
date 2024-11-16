@@ -26,8 +26,28 @@ public class Initializer {
                   Category books = new Category(null, "Books");
                   Category clothing = new Category(null, "Clothing");
                   Category home = new Category(null, "Home");
+                  Category garden = new Category(null, "Garden");
+                  Category kitchen = new Category(null, "Kitchen");
+                  Category office = new Category(null, "Office");
+                  Category sports = new Category(null, "Sports");
+                  Category toys = new Category(null, "Toys");
+                  Category beauty = new Category(null, "Beauty");
+                  Category health = new Category(null, "Health");
+                  Category baby = new Category(null, "Baby");
+                  Category automotive = new Category(null, "Automotive");
+                  Category industrial = new Category(null, "Industrial");
+                  Category musical_instruments = new Category(null, "Musical Instruments");
+                  Category pet_products = new Category(null, "Pet Products");
+                  Category video_games = new Category(null, "Video Games");
+                  Category software = new Category(null, "Software");
+                  Category arts = new Category(null, "Arts");
+                  Category crafts = new Category(null, "Crafts");
+                  Category collectibles = new Category(null, "Collectibles");
 
-                  categoryRepository.saveAll(List.of(electronics, books, clothing, home));
+                  categoryRepository.saveAll(
+                              List.of(electronics, books, clothing, home, garden, kitchen, office, sports, toys,
+                                          beauty, health, baby, automotive, industrial, musical_instruments,
+                                          pet_products, video_games, software, arts, crafts, collectibles));
 
                   // Base relative path for images
                   String imageBasePath = "/images/";

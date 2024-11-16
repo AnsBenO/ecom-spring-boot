@@ -18,6 +18,7 @@ import com.ansbeno.start_beca.dtos.ProductDto;
 import com.ansbeno.start_beca.services.category.CategoryService;
 import com.ansbeno.start_beca.services.product.ProductService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,18 +35,25 @@ class ProductController {
       public String getAllProducts(@RequestParam(defaultValue = "1") int page,
                   @RequestParam(required = false, defaultValue = "") String keyword,
                   @RequestParam(required = false, defaultValue = "") String category,
+                  HttpServletRequest request,
                   Model model) {
-            if (page < 1) {
-                  page = 1;
-            }
-
+            // Fetch products based on keyword, category, and page
             PagedResultDto<ProductDto> products = productService.findAll(page, keyword, category);
 
-            List<String> categories = categoryService.findNames();
-
-            model.addAttribute("categories", categories);
             model.addAttribute("products", products);
+            model.addAttribute("categories", categoryService.findNames());
+            model.addAttribute("category", category);
             model.addAttribute("keyword", keyword);
+
+            // Check if the request is an HTMX request
+            boolean isHtmxRequest = request.getHeader("HX-Request") != null;
+
+            // Return partial HTML if it's an HTMX request
+            if (isHtmxRequest) {
+                  return "views/products/list-products :: products-table";
+            }
+
+            // Otherwise, return the full page
             return "views/products/list-products";
       }
 

@@ -1,22 +1,22 @@
 <!-- The Modal -->
-<div id="myModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 hidden">
-      <span
-            class="absolute top-4 right-8 text-white text-3xl font-bold cursor-pointer hover:text-gray-400 close">&times;</span>
+<div id="viewImageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 hidden">
+      <span class="absolute top-4 right-8 text-white text-3xl font-bold cursor-pointer hover:text-gray-400 close"><i
+                  class="fa-solid fa-xmark"></i></span>
       <div class="relative w-4/5 max-w-3xl">
-            <img class="w-full max-h-[80vh] object-contain" id="img01" />
+            <img class="w-full max-h-[80vh] object-contain" alt="" id="modalImage" />
             <div id="caption" class="text-center text-gray-300 mt-4"></div>
       </div>
 </div>
 <script>
-      var modal = document.getElementById("myModal");
-      var modalImg = document.getElementById("img01");
+      var modal = document.getElementById("viewImageModal");
+      var modalImg = document.getElementById("modalImage");
       var captionText = document.getElementById("caption");
       document.querySelectorAll('.view-image-btn').forEach(button => {
             button.onclick = function () {
                   modalImg.classList.add("fade-in");
                   setTimeout(() => {
                         modal.classList.remove('hidden');
-                  }, 500);
+                  }, 300);
                   modalImg.src = this.getAttribute('data-image-src');
                   captionText.innerHTML = this.getAttribute('data-image-alt');
             };
@@ -27,6 +27,6 @@
             setTimeout(() => {
                   modal.classList.add('hidden');
                   modalImg.classList.remove("fade-out");
-            }, 500)
+            }, 300)
       };
 </script>
