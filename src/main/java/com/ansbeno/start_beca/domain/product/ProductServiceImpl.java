@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.services.product;
+package com.ansbeno.start_beca.domain.product;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ansbeno.start_beca.dtos.PagedResultDto;
 import com.ansbeno.start_beca.dtos.ProductDto;
-import com.ansbeno.start_beca.entities.Product;
 import com.ansbeno.start_beca.mappers.ProductMapper;
-import com.ansbeno.start_beca.repositories.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

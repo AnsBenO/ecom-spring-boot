@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.services.category;
+package com.ansbeno.start_beca.domain.category;
 
 import java.util.List;
 
@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ansbeno.start_beca.dtos.CategoryDto;
 import com.ansbeno.start_beca.dtos.PagedResultDto;
-import com.ansbeno.start_beca.entities.Category;
 import com.ansbeno.start_beca.mappers.CategoryMapper;
-import com.ansbeno.start_beca.repositories.CategoryRepository;
 
 import lombok.RequiredArgsConstructor;
 

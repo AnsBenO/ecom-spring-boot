@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.entities;
+package com.ansbeno.start_beca.domain.category;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

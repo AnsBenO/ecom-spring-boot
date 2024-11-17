@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.services.product;
+package com.ansbeno.start_beca.domain.product;
 
 import com.ansbeno.start_beca.dtos.PagedResultDto;
 import com.ansbeno.start_beca.dtos.ProductDto;

@@ -1,4 +1,6 @@
-package com.ansbeno.start_beca.entities;
+package com.ansbeno.start_beca.domain.product;
+
+import com.ansbeno.start_beca.domain.category.Category;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

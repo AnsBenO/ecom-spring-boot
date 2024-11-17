@@ -111,12 +111,13 @@
                                     hx-target="#productsTable"
                                     class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">Next</a>
                         </div>
+                        <div th:replace="~{fragments/product-image-modal}"></div>
+                        <script th:src="@{/js/viewImage.js}"></script>
                   </div>
             </div>
 
 
 
-            <div th:replace="~{fragments/product-image-modal}"></div>
       </main>
 </body>
 

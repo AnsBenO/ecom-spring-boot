@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.controllers;
+package com.ansbeno.start_beca.web.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

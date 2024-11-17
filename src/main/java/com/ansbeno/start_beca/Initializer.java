@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.ansbeno.start_beca.entities.Category;
-import com.ansbeno.start_beca.entities.Product;
-import com.ansbeno.start_beca.repositories.CategoryRepository;
-import com.ansbeno.start_beca.repositories.ProductRepository;
+import com.ansbeno.start_beca.domain.category.Category;
+import com.ansbeno.start_beca.domain.category.CategoryRepository;
+import com.ansbeno.start_beca.domain.product.Product;
+import com.ansbeno.start_beca.domain.product.ProductRepository;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;

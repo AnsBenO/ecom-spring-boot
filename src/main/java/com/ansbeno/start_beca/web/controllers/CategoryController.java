@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.controllers;
+package com.ansbeno.start_beca.web.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ansbeno.start_beca.domain.category.CategoryService;
 import com.ansbeno.start_beca.dtos.CategoryDto;
 import com.ansbeno.start_beca.dtos.PagedResultDto;
-import com.ansbeno.start_beca.services.category.CategoryServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/categories")
 class CategoryController {
 
-      private final CategoryServiceImpl categoryService;
+      private final CategoryService categoryService;
 
       @GetMapping
       public String getAllCategories(
@@ -28,9 +28,6 @@ class CategoryController {
                   @RequestParam(defaultValue = "1") int page,
                   HttpServletRequest request,
                   Model model) {
-            if (page < 1) {
-                  page = 1;
-            }
 
             PagedResultDto<CategoryDto> categories = categoryService.findAll(page, keyword);
 

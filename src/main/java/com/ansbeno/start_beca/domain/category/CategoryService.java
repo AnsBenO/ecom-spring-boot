@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.services.category;
+package com.ansbeno.start_beca.domain.category;
 
 import java.util.List;
 

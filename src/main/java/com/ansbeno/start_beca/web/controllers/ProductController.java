@@ -1,6 +1,4 @@
-package com.ansbeno.start_beca.controllers;
-
-import java.util.List;
+package com.ansbeno.start_beca.web.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ansbeno.start_beca.domain.category.CategoryService;
+import com.ansbeno.start_beca.domain.product.ProductService;
 import com.ansbeno.start_beca.dtos.PagedResultDto;
 import com.ansbeno.start_beca.dtos.ProductDto;
-import com.ansbeno.start_beca.services.category.CategoryService;
-import com.ansbeno.start_beca.services.product.ProductService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

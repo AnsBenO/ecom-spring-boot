@@ -4,8 +4,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import com.ansbeno.start_beca.domain.product.Product;
 import com.ansbeno.start_beca.dtos.ProductDto;
-import com.ansbeno.start_beca.entities.Product;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
