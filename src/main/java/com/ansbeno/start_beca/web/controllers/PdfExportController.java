@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ansbeno.start_beca.domain.pdf.HtmlToPdfServiceImpl;
+import com.ansbeno.start_beca.domain.exports.pdf.HtmlToPdfServiceImpl;
 import com.ansbeno.start_beca.domain.product.ProductService;
 import com.ansbeno.start_beca.dtos.ProductDto;
 
@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class PdfController {
+public class PdfExportController {
 
       private final HtmlToPdfServiceImpl htmlToPdfService;
       private final ProductService productService;
