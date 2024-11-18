@@ -43,25 +43,35 @@
 
                         <div class="flex items-center space-x-2 my-1 justify-end">
 
-                              <!-- Pagination Controls -->
-                              <a th:if="${products.hasPrevious}"
-                                    th:hx-get="'/products?page=' + ${products.pageNumber - 1} + '&keyword=' + ${keyword} + '&category=' + ${category}"
-                                    hx-target="#productsTable"
-                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">Previous</a>
 
-                              <a th:if="${products.hasNext}"
-                                    th:hx-get="'/products?page=' + ${products.pageNumber + 1} + '&keyword=' + ${keyword} + '&category=' + ${category}"
-                                    hx-target="#productsTable"
-                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">Next</a>
-
+                              <a href="/generate-products-table-pdf"
+                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none text-blue-700">
+                                    <i class="fa-regular fa-file-pdf"></i>
+                              </a>
                               <!-- Add Product Button -->
                               <div class="flex items-center space-x-2">
 
                                     <a th:href="@{/products/add}"
                                           class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none text-green-500">
-                                          <i class="fa-solid fa-plus"></i> Add Product
+                                          <i class="fa-solid fa-plus"></i>
                                     </a>
                               </div>
+
+                              <!-- Pagination Controls -->
+                              <a th:if="${products.hasPrevious}"
+                                    th:hx-get="'/products?page=' + ${products.pageNumber - 1} + '&keyword=' + ${keyword} + '&category=' + ${category}"
+                                    hx-target="#productsTable"
+                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">
+                                    <i class="fa-solid fa-arrow-left"></i>
+
+                              </a>
+
+                              <a th:if="${products.hasNext}"
+                                    th:hx-get="'/products?page=' + ${products.pageNumber + 1} + '&keyword=' + ${keyword} + '&category=' + ${category}"
+                                    hx-target="#productsTable"
+                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                              </a>
                         </div>
                   </header>
                   <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
@@ -104,12 +114,18 @@
                               <a th:if="${products.hasPrevious}"
                                     th:hx-get="'/products?page=' + ${products.pageNumber - 1} + '&keyword=' + ${keyword} + '&category=' + ${category}"
                                     hx-target="#productsTable"
-                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">Previous</a>
+                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">
+                                    <i class="fa-solid fa-arrow-left"></i>
+
+                              </a>
 
                               <a th:if="${products.hasNext}"
                                     th:hx-get="'/products?page=' + ${products.pageNumber + 1} + '&keyword=' + ${keyword} + '&category=' + ${category}"
                                     hx-target="#productsTable"
-                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">Next</a>
+                                    class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none">
+                                    <i class="fa-solid fa-arrow-right"></i>
+
+                              </a>
                         </div>
                         <div th:replace="~{fragments/product-image-modal}"></div>
                         <script th:src="@{/js/viewImage.js}"></script>

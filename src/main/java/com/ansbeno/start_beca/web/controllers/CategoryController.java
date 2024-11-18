@@ -23,7 +23,7 @@ class CategoryController {
       private final CategoryService categoryService;
 
       @GetMapping
-      public String getAllCategories(
+      String getAllCategories(
                   @RequestParam(required = false, defaultValue = "") String keyword,
                   @RequestParam(defaultValue = "1") int page,
                   HttpServletRequest request,

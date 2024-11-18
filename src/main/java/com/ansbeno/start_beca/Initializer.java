@@ -2,6 +2,7 @@ package com.ansbeno.start_beca;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.ansbeno.start_beca.domain.category.Category;
@@ -17,6 +18,9 @@ import lombok.RequiredArgsConstructor;
 public class Initializer {
       private final CategoryRepository categoryRepository;
       private final ProductRepository productRepository;
+      // Base relative path for images
+      @Value("${image.directory}")
+      String imageBasePath;
 
       @PostConstruct
       public void insertData() {
@@ -49,11 +53,44 @@ public class Initializer {
                                           beauty, health, baby, automotive, industrial, musical_instruments,
                                           pet_products, video_games, software, arts, crafts, collectibles));
 
-                  // Base relative path for images
-                  String imageBasePath = "/images/";
-
                   // Create and save products, assigning them to categories and images
                   productRepository.saveAll(List.of(
+                              // Electronics
+                              new Product(null, "Laptop", "High performance laptop", 1200.0,
+                                          imageBasePath + "electronics.jpg", electronics),
+                              new Product(null, "Smartphone", "Latest model smartphone", 800.0,
+                                          imageBasePath + "electronics.jpg", electronics),
+                              new Product(null, "Tablet", "10-inch tablet", 300.0, imageBasePath + "electronics.jpg",
+                                          electronics),
+                              new Product(null, "Headphones", "Noise-cancelling headphones", 150.0,
+                                          imageBasePath + "electronics.jpg", electronics),
+                              new Product(null, "Camera", "DSLR camera", 500.0, imageBasePath + "electronics.jpg",
+                                          electronics),
+
+                              // Electronics
+                              new Product(null, "Laptop", "High performance laptop", 1200.0,
+                                          imageBasePath + "electronics.jpg", electronics),
+                              new Product(null, "Smartphone", "Latest model smartphone", 800.0,
+                                          imageBasePath + "electronics.jpg", electronics),
+                              new Product(null, "Tablet", "10-inch tablet", 300.0, imageBasePath + "electronics.jpg",
+                                          electronics),
+                              new Product(null, "Headphones", "Noise-cancelling headphones", 150.0,
+                                          imageBasePath + "electronics.jpg", electronics),
+                              new Product(null, "Camera", "DSLR camera", 500.0, imageBasePath + "electronics.jpg",
+                                          electronics),
+
+                              // Electronics
+                              new Product(null, "Laptop", "High performance laptop", 1200.0,
+                                          imageBasePath + "electronics.jpg", electronics),
+                              new Product(null, "Smartphone", "Latest model smartphone", 800.0,
+                                          imageBasePath + "electronics.jpg", electronics),
+                              new Product(null, "Tablet", "10-inch tablet", 300.0, imageBasePath + "electronics.jpg",
+                                          electronics),
+                              new Product(null, "Headphones", "Noise-cancelling headphones", 150.0,
+                                          imageBasePath + "electronics.jpg", electronics),
+                              new Product(null, "Camera", "DSLR camera", 500.0, imageBasePath + "electronics.jpg",
+                                          electronics),
+
                               // Electronics
                               new Product(null, "Laptop", "High performance laptop", 1200.0,
                                           imageBasePath + "electronics.jpg", electronics),

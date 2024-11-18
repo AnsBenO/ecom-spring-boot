@@ -30,7 +30,7 @@ class ProductController {
       private final CategoryService categoryService;
 
       @GetMapping
-      public String getAllProducts(@RequestParam(defaultValue = "1") int page,
+      String getAllProducts(@RequestParam(defaultValue = "1") int page,
                   @RequestParam(required = false, defaultValue = "") String keyword,
                   @RequestParam(required = false, defaultValue = "") String category,
                   HttpServletRequest request,
@@ -56,25 +56,25 @@ class ProductController {
       }
 
       @GetMapping("/{id}")
-      public String getProductById(Model model) {
+      String getProductById(Model model) {
             return "";
       }
 
       @PostMapping
-      public String createProduct(@RequestBody ProductDto productDto) {
+      String createProduct(@RequestBody ProductDto productDto) {
             ProductDto savedProduct = productService.save(productDto);
             return "";
       }
 
       @PutMapping("/{id}")
-      public String updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
+      String updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
             productDto.setId(id);
             ProductDto updatedProduct = productService.save(productDto);
             return "";
       }
 
       @DeleteMapping("/{id}")
-      public String deleteProduct(@PathVariable Long id) {
+      String deleteProduct(@PathVariable Long id) {
             productService.delete(id);
             return "";
       }

@@ -1,5 +1,7 @@
 package com.ansbeno.start_beca.domain.product;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -64,6 +66,11 @@ public class ProductServiceImpl implements ProductService {
             Product productToDelete = productRepository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
             productRepository.delete(productToDelete);
+      }
+
+      @Override
+      public List<ProductDto> findAllNoPagination() {
+            return productRepository.findAll().stream().map(productMapper::toTarget).toList();
       }
 
 }

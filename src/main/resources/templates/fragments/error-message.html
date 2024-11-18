@@ -29,8 +29,8 @@
                               errorNotification.classList.remove("fade-in");
                               errorNotification.classList.add("fade-out");
                               setTimeout(() => {
-                                    errorNotification.classList.add("hidden-message");
-                              }, 500);
+                                    errorNotification.classList.add("hidden");
+                              }, 300);
                         }
                   }, 10000);
 
@@ -42,8 +42,8 @@
                               errorNotification.classList.add("fade-out");
                               // Hide the element after the fade-out animation completes
                               setTimeout(() => {
-                                    errorNotification.classList.add("hidden-message");
-                              }, 500);
+                                    errorNotification.classList.add("hidden");
+                              }, 300);
                         }
                   }
             </script>
