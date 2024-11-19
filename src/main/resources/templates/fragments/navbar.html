@@ -1,17 +1,31 @@
 <!-- Header -->
-<header class="bg-gradient-to-r from-midnight via-twilight to-oceanBlue text-white p-4 shadow-md">
+<header class="fixed w-full z-30 bg-gradient-to-r from-midnight via-twilight to-oceanBlue text-white p-3 shadow-md">
       <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-xl font-semibold">My Demo App</h1>
-            <nav class="space-x-4" aria-label="Main navigation menu">
-                  <a th:href="@{/}" class="rounded p-2 hover:bg-blue-800">
+            <nav class="flex items-center text-white gap-2" aria-label="Main navigation menu">
+                  <a th:href="@{/}" class="rounded px-3 py-2 hover:bg-blue-900 focus:ring focus:ring-blue-500">
                         Home
                   </a>
-                  <a th:href="@{/about}" class="rounded p-2 hover:bg-blue-800">
+                  <a th:href="@{/about}" class="rounded px-3 py-2 hover:bg-blue-900 focus:ring focus:ring-blue-500">
                         About
                   </a>
-                  <a th:href="@{/contact}" class="rounded p-2 hover:bg-blue-800">
+                  <a th:href="@{/contact}" class="rounded px-3 py-2 hover:bg-blue-900 focus:ring focus:ring-blue-500">
                         Contact
                   </a>
+                  <div class="ml-auto flex space-x-4">
+                        <div sec:authorize="!isAuthenticated()">
+                              <a class="bg-blue-400 font-medium text-oceanBlue hover:bg-blue-200 rounded px-3 py-2 focus:ring focus:ring-blue-500"
+                                    th:href="@{/login}">
+                                    Login
+                              </a>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                              <a class="bg-blue-400 font-medium text-oceanBlue hover:bg-blue-200 rounded px-3 py-2 focus:ring focus:ring-blue-500"
+                                    th:href="@{/logout}">
+                                    Logout
+                              </a>
+                        </div>
+                  </div>
             </nav>
       </div>
 </header>

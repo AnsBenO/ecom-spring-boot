@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.domain.exports.spreadsheet;
+package com.ansbeno.start_beca.exports.spreadsheet;
 
 import java.io.IOException;
 import java.util.List;

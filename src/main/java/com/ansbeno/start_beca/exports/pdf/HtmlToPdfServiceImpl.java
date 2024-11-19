@@ -1,4 +1,4 @@
-package com.ansbeno.start_beca.domain.exports.pdf;
+package com.ansbeno.start_beca.exports.pdf;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Map;

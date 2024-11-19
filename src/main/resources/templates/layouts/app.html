@@ -26,29 +26,79 @@
             <div th:replace="~{fragments/navbar}"></div>
 
             <!-- Main Layout with Sidebar and Content -->
-            <div class="flex flex-1">
-
+            <div class="flex flex-1 mt-16">
                   <!-- Sidebar -->
-                  <aside class="w-64 bg-gray-100 p-4 hidden md:block border-r">
-                        <nav class="space-y-2" aria-label="Side navigation menu">
+                  <aside id="sidebar"
+                        class="w-64 bg-gray-100 hidden md:block border-r transition-all duration-300 relative">
+                        <button id="toggleSidebar"
+                              class="absolute top-2 -right-3 px-2 bg-gray-200 rounded-full hover:bg-gray-300 shadow-md">
+                              <i id="toggleIcon" class="fa-solid fa-angle-left"></i>
+                        </button>
+                        <nav class="w-full h-full pt-20" aria-label="Side navigation menu">
+                              <!-- Dashboard -->
                               <a href="#"
-                                    class="block py-2 px-4 rounded hover:bg-blue-950t hover:text-blue-800 hover:bg-slate-200">
-                                    Dashboard
+                                    class="flex items-center gap-3 py-3 px-4 rounded hover:bg-slate-200 hover:text-oceanBlue text-gray-800 text-base">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    <span class="sidebar-label">Dashboard</span>
                               </a>
+
+                              <!-- Products -->
                               <a th:href="@{/products}"
-                                    class="block py-2 px-4 rounded hover:bg-blue-950t hover:text-blue-800 hover:bg-slate-200">
-                                    Products
+                                    class="flex items-center gap-3 py-3 px-4 rounded hover:bg-slate-200 hover:text-oceanBlue text-gray-800 text-base">
+                                    <i class="fa-solid fa-box"></i>
+                                    <span class="sidebar-label">Products</span>
                               </a>
+
+                              <!-- Categories -->
                               <a th:href="@{/categories}"
-                                    class="block py-2 px-4 rounded hover:bg-blue-950t hover:text-blue-800 hover:bg-slate-200">
-                                    Categories
+                                    class="flex items-center gap-3 py-3 px-4 rounded hover:bg-slate-200 hover:text-oceanBlue text-gray-800 text-base">
+                                    <i class="fa-solid fa-list"></i>
+                                    <span class="sidebar-label">Categories</span>
                               </a>
+
+                              <!-- Settings -->
                               <a href="#"
-                                    class="block py-2 px-4 rounded hover:bg-blue-950t hover:text-blue-800 hover:bg-slate-200">
-                                    Settings
+                                    class="flex items-center gap-3 py-3 px-4 rounded hover:bg-slate-200 hover:text-oceanBlue text-gray-800 text-base">
+                                    <i class="fa-solid fa-gear"></i>
+                                    <span class="sidebar-label">Settings</span>
                               </a>
                         </nav>
                   </aside>
+
+                  <main id="mainContent" class="transition-all duration-300">
+                        <!-- Main content here -->
+                  </main>
+
+                  <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                              const sidebar = document.getElementById('sidebar');
+                              const toggleButton = document.getElementById('toggleSidebar');
+                              const toggleIcon = document.getElementById('toggleIcon');
+                              const sidebarLabels = document.querySelectorAll('.sidebar-label');
+
+                              toggleButton.addEventListener('click', () => {
+                                    // Toggle the sidebar width
+                                    if (sidebar.classList.contains('w-64')) {
+                                          setTimeout(() => {
+                                                sidebar.classList.remove('w-64');
+                                                sidebar.classList.add('w-16');
+                                                toggleIcon.classList.remove('fa-angle-left');
+                                                toggleIcon.classList.add('fa-angle-right');
+                                          }, 50);
+                                          sidebarLabels.forEach(label => label.classList.add('hidden'));
+                                    } else {
+                                          setTimeout(() => {
+                                                sidebarLabels.forEach(label => label.classList.remove('hidden'));
+
+                                          }, 50)
+                                          sidebar.classList.remove('w-16');
+                                          sidebar.classList.add('w-64');
+                                          toggleIcon.classList.remove('fa-angle-right');
+                                          toggleIcon.classList.add('fa-angle-left');
+                                    }
+                              });
+                        });
+                  </script>
 
                   <!--?  Main Content -->
                   <main layout:fragment="content" class="flex-1 p-6">
@@ -58,7 +108,7 @@
                   </main>
 
                   <!--? ERROR MESSAGE BOX -->
-                  <div th:replace="~{fragments/error-message :: errorMessageBox(error=${error})}"></div>
+                  <div th:replace="~{/fragments/error-message :: errorMessageBox(error=${error})}"></div>
 
                   <!-- ? SUCCESS MESSAGE BOX -->
                   <div th:replace="~{/fragments/success-message :: successMessageBox(message=${success})}"></div>
