@@ -8,12 +8,16 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.ansbeno.start_beca.domain.user.Permission;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -36,15 +40,26 @@ class SecurityConfig {
 
                         .defaultSuccessUrl("/")
 
-                        .loginProcessingUrl("/login")
+                        .successHandler((HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    Authentication authentication) -> {
+                              request.getSession().setAttribute("loginSuccessMessage",
+                                          "You have logged in successfully!");
+                              response.sendRedirect("/");
+                        })
 
-                        // .failureUrl("/login?error=true")
+                        .failureUrl("/login?error=true")
 
-                        .permitAll());
+                        .permitAll())
+                        .logout(logout -> logout.deleteCookies("remove")
+                                    .invalidateHttpSession(true)
+                                    .logoutUrl("/post-logout")
+                                    .permitAll());
 
             http.authorizeHttpRequests(authConfig -> {
                   authConfig.requestMatchers(HttpMethod.GET, "/products")
                               .hasAnyAuthority(Permission.READ_ALL_PRODUCTS.name());
+                  authConfig.requestMatchers("/products/add").hasAnyAuthority(Permission.SAVE_ONE_PRODUCT.name());
                   authConfig.requestMatchers(HttpMethod.GET, "/categories")
                               .hasAnyAuthority(Permission.READ_ALL_PRODUCTS.name());
             });

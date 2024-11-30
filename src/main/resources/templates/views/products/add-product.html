@@ -1,0 +1,81 @@
+<div id="modal"
+      class="modal fixed flex items-center justify-center inset-0 bg-gray-900 bg-opacity-60 transition-opacity z-50 overflow-scroll">
+      <button class="absolute top-4 right-8 text-white text-3xl font-bold cursor-pointer hover:text-gray-400 close"
+            onclick="closeModal()">
+            <i class="fa-solid fa-xmark"></i>
+      </button>
+      <!-- Modal content -->
+      <div class="p-5 bg-white shadow-lg rounded-lg relative w-4/5 max-w-3xl fade-in" data-location="product-create"
+            id="contentDiv">
+
+            <h2
+                  class="text-center text-gray-700 mb-6 text-2xl font-bold tracking-wide capitalize border-b-2 border-gray-300 py-2">
+                  <i class="fa-solid fa-box"></i>
+                  Create a New product
+            </h2>
+
+            <form class="bg-white min-w-96" th:object="${product}" th:action="@{/products/new}" method="post">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Name -->
+                        <div>
+                              <label for="name" class="block text-gray-700 font-medium mb-2">
+                                    <i class="fa-solid fa-heading mr-2"></i> Name
+                              </label>
+                              <input type="text" id="name" name="name" th:field="*{name}"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400"
+                                    placeholder="Enter product name" />
+                              <span class="text-red-500 text-sm mt-1 block" th:if="${#fields.hasErrors('name')}"
+                                    th:errors="*{name}"></span>
+                        </div>
+
+                        <!-- Price -->
+                        <div>
+                              <label for="price" class="block text-gray-700 font-medium mb-2">
+                                    <i class="fa-solid fa-dollar-sign mr-2"></i> Price
+                              </label>
+                              <input type="text" id="price" name="price" th:field="*{price}"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400"
+                                    placeholder="Enter product price" />
+                              <span class="text-red-500 text-sm mt-1 block" th:if="${#fields.hasErrors('price')}"
+                                    th:errors="*{price}"></span>
+                        </div>
+
+                        <!-- Image URL -->
+                        <div>
+                              <label for="image" class="block text-gray-700 font-medium mb-2">
+                                    <i class="fa-solid fa-image mr-2"></i> Photo URL
+                              </label>
+                              <input type="text" id="image" name="image" th:field="*{image}"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400"
+                                    placeholder="Enter photo URL" />
+                              <span class="text-red-500 text-sm mt-1 block" th:if="${#fields.hasErrors('image')}"
+                                    th:errors="*{image}"></span>
+                        </div>
+
+                        <!-- Description -->
+                        <div>
+                              <label for="description" class="block text-gray-700 font-medium mb-2">
+                                    <i class="fa-solid fa-align-left mr-2"></i> Description
+                              </label>
+                              <textarea id="description" name="description" th:field="*{description}"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400"
+                                    placeholder="Enter product description"></textarea>
+                              <span class="text-red-500 text-sm mt-1 block" th:if="${#fields.hasErrors('description')}"
+                                    th:errors="*{description}"></span>
+                        </div>
+                  </div>
+
+                  <!-- Hidden Input -->
+                  <input type="hidden" th:field="*{id}" />
+
+                  <!-- Submit Button -->
+                  <button type="submit"
+                        class="w-full mt-6 bg-blue-900 hover:bg-blue-600 text-white font-medium rounded-lg px-4 py-2 transition duration-300 transform hover:scale-10">
+                        <i class="fa-solid fa-check mr-2"></i> Create Product
+                  </button>
+            </form>
+
+      </div>
+
+</div>
+</div>

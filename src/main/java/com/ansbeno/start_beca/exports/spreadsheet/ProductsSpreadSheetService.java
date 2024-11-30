@@ -1,6 +1,5 @@
 package com.ansbeno.start_beca.exports.spreadsheet;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Sheet;

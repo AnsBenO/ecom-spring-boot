@@ -60,6 +60,13 @@ class ProductController {
             return "";
       }
 
+      @GetMapping("/add")
+      String showAddProduct(Model model) {
+            ProductDto productDto = new ProductDto();
+            model.addAttribute("product", productDto);
+            return "views/products/add-product";
+      }
+
       @PostMapping
       String createProduct(@RequestBody ProductDto productDto) {
             ProductDto savedProduct = productService.save(productDto);

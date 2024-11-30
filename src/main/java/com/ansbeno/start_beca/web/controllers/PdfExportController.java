@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ansbeno.start_beca.domain.product.ProductService;
@@ -22,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class PdfExportController {
+class PdfExportController {
 
       private final HtmlToPdfServiceImpl htmlToPdfService;
       private final ProductService productService;
@@ -34,7 +33,6 @@ public class PdfExportController {
 
             data.put("products", products);
 
-            // Path to the template (ensure it's in `src/main/resources/templates`)
             String templateName = "views/pdf/products";
 
             // Generate PDF as a byte array

@@ -13,12 +13,12 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-public class SpreadsheetExportController {
+class SpreadsheetExportController {
 
       private final ProductsSpreadSheetService productsSpreadSheetService;
 
       @GetMapping("/generate-products-table-spreadsheet")
-      public void generateProductsTableSpreadsheet(HttpServletResponse response) {
+      void generateProductsTableSpreadsheet(HttpServletResponse response) {
             try (Workbook workbook = productsSpreadSheetService.generateProductsWorkbook();
                         OutputStream outputStream = response.getOutputStream()) {
 

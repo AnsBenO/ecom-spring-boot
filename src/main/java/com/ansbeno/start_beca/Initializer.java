@@ -1,5 +1,6 @@
 package com.ansbeno.start_beca;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,9 @@ import com.ansbeno.start_beca.domain.category.Category;
 import com.ansbeno.start_beca.domain.category.CategoryRepository;
 import com.ansbeno.start_beca.domain.product.Product;
 import com.ansbeno.start_beca.domain.product.ProductRepository;
+import com.ansbeno.start_beca.domain.user.Role;
+import com.ansbeno.start_beca.domain.user.UserEntity;
+import com.ansbeno.start_beca.domain.user.UserRepository;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +22,15 @@ import lombok.RequiredArgsConstructor;
 public class Initializer {
       private final CategoryRepository categoryRepository;
       private final ProductRepository productRepository;
+      private final UserRepository userRepository;
+
       // Base relative path for images
       @Value("${image.directory}")
       String imageBasePath;
 
       @PostConstruct
       public void insertData() {
-            if (categoryRepository.count() == 0 && productRepository.count() == 0) {
+            if (categoryRepository.count() == 0 && productRepository.count() == 0 && userRepository.count() == 0) {
                   // Create and save categories
                   Category electronics = new Category(null, "Electronics");
                   Category books = new Category(null, "Books");
@@ -133,6 +139,11 @@ public class Initializer {
                                           home),
                               new Product(null, "Blender", "High-speed blender", 60.0, imageBasePath + "home.jpg",
                                           home)));
+
+                  userRepository.save(
+                              new UserEntity(null, "guest", "guest@email.com",
+                                          "$2a$10$W2b82paYuHH6Gh7MAG25k.odnuTZT5ToKmD8l2jAWGC8P79gOgt1G", Role.ADMIN,
+                                          LocalDateTime.now(), LocalDateTime.now()));
             }
       }
 

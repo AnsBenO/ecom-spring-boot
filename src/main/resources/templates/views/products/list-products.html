@@ -44,19 +44,22 @@
                         <div class="flex items-center space-x-2 my-1 justify-end">
                               <a href="/generate-products-table-spreadsheet"
                                     class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none text-green-800">
-                                    <i class="fa-regular fa-file-excel"></i>
+                                    <i class="fa-regular fa-file-excel"></i> <span class="text-xs font-bold">Export
+                                          Spreadsheet</span>
                               </a>
 
                               <a href="/generate-products-table-pdf"
                                     class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none text-blue-700">
-                                    <i class="fa-regular fa-file-pdf"></i>
+                                    <i class="fa-regular fa-file-pdf"></i><span class="text-xs font-bold"> Export
+                                          PDF</span>
                               </a>
                               <!-- Add Product Button -->
                               <div class="flex items-center space-x-2">
 
-                                    <a th:href="@{/products/add}"
+                                    <a hx-get="/products/add" hx-swap="outerHtml" hx-target=".modalDiv"
                                           class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer select-none text-green-500">
-                                          <i class="fa-solid fa-plus"></i>
+                                          <i class="fa-solid fa-plus"></i> <span class="text-xs font-bold">Add
+                                                Product</span>
                                     </a>
                               </div>
 

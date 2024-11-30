@@ -20,10 +20,13 @@
                               </a>
                         </div>
                         <div sec:authorize="isAuthenticated()">
-                              <a class="bg-blue-400 font-medium text-oceanBlue hover:bg-blue-200 rounded px-3 py-2 focus:ring focus:ring-blue-500"
-                                    th:href="@{/logout}">
-                                    Logout
-                              </a>
+                              <form th:action="@{/logout}" method="post" class="m-0 p-0">
+                                    <button
+                                          class="bg-blue-400 font-medium text-oceanBlue hover:bg-blue-200 rounded px-3 py-2 focus:ring focus:ring-blue-500">
+                                          Logout
+                                    </button>
+
+                              </form>
                         </div>
                   </div>
             </nav>

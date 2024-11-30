@@ -5,13 +5,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping
 class StaticPageController {
 
       @GetMapping
-      String homePage(Model model) {
-            model.addAttribute("success", "Hello From Controller");
+      String homePage(HttpSession session, Model model) {
+            String successMessage = (String) session.getAttribute("loginSuccessMessage");
+            session.removeAttribute("loginSuccessMessage");
+            model.addAttribute("successMessage", successMessage);
             return "views/home";
       }
 

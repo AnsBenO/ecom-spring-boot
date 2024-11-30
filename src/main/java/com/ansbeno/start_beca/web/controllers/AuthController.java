@@ -26,7 +26,7 @@ class AuthController {
       private final UserService userService;
 
       @GetMapping("/register")
-      public String getRegisterForm(Model model) {
+      String getRegisterForm(Model model) {
             if (isUserAuthenticated()) {
                   return "redirect:/";
             }
@@ -36,7 +36,7 @@ class AuthController {
       }
 
       @PostMapping("/register")
-      public String registerUser(
+      String registerUser(
                   @Valid @ModelAttribute("user") UserDto user,
                   BindingResult result) {
             if (isUserAuthenticated()) {
@@ -52,13 +52,13 @@ class AuthController {
                   return "redirect:/register?fail";
             }
             userService.save(user);
-            return "redirect:/";
+            return "redirect:/login";
       }
 
       @GetMapping("/login")
-      public String showLoginForm(Model model,
-                  @RequestParam(value = "error", required = false) String error,
-                  @RequestParam(value = "logout", required = false) String logout,
+      String showLoginForm(Model model,
+                  @RequestParam(required = false) String error,
+                  @RequestParam(required = false) String logout,
                   RedirectAttributes redirectAttributes) {
             if (error != null) {
                   model.addAttribute("error", "Invalid credentials");
@@ -73,9 +73,10 @@ class AuthController {
             return "views/auth/login";
       }
 
-      @GetMapping("/logout")
-      public String logout() {
-            return "auth/login";
+      @GetMapping("/post-logout")
+      String postLogout(RedirectAttributes redirectAttributes) {
+            redirectAttributes.addFlashAttribute("success", "You have been logged out successfully!");
+            return "redirect:/";
       }
 
       private boolean isUserAuthenticated() {

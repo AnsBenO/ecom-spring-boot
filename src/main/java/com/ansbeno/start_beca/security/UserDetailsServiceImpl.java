@@ -24,6 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             Optional<UserEntity> user = userRepository.findByEmail(email);
             if (user.isPresent()) {
+
                   UserEntity foundUser = user.get();
 
                   var authorities = foundUser.getRole().getPermissions().stream()
